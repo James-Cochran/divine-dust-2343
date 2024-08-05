@@ -33,12 +33,29 @@ RSpec.describe "Flights Index Page" do
 
   it "shows the names of a flights passengers under the flight number" do
     visit "/flights"
-    save_and_open_page
+   
     expect(page).to have_content("Flight Number: #{@flight1.number} - Airline: #{@airline.name}")
     expect(page).to have_content(@passenger1.name)
     
     expect(page).to have_content("Flight Number: #{@flight2.number} - Airline: #{@airline.name}")
     expect(page).to have_content(@passenger2.name)
+
+  end
+
+  # User Story 2
+  it "has a link next to a passnegers name to remove that passenger from  that flight" do
+    visit "/flights"
+    save_and_open_page
+    expect(page).to have_content("Flight Number: #{@flight1.number} - Airline: #{@airline.name}")
+    expect(page).to have_content(@passenger1.name)
+    expect(page).to have_link("Remove Passenger")
+
+    expect(page).to have_content("Flight Number: #{@flight2.number} - Airline: #{@airline.name}")
+    expect(page).to have_content(@passenger2.name)
+    expect(page).to have_link("Remove Passenger") 
+  end
+
+  it "removes the passenger from that flight when the link is clicked and the page shows the passenger is no longer on that flight" do
 
   end
 end
